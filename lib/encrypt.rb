@@ -1,7 +1,7 @@
 require 'date'
 
 class Encrypt
-  attr_reader :message, :key, :date
+  attr_reader :message, :key, :date, :key_hash
   attr_accessor
 
   def initialize(message, key, date)
@@ -9,6 +9,7 @@ class Encrypt
     @key = key
     @date = date
     @key_hash = Hash.new (0)
+    @offset_hash = Hash.new (0)
   end
 
   def key_shift
@@ -20,6 +21,20 @@ class Encrypt
     @key_hash[:d] = seperated_key[3] + seperated_key[4]
 
     return @key_hash
+  end
+
+  def offset_shift
+    date_squared = (@date.to_i * @date.to_i).to_s.split('') # Returns ["2", "2", "5", "3", "6", "6", "1", "4", "8", "8", "4"]
+
+    @offset_hash[:d] = date_squared.last
+    date_squared.pop
+    @offset_hash[:c] = date_squared.last
+    date_squared.pop
+    @offset_hash[:b] = date_squared.last
+    date_squared.pop
+    @offset_hash[:a] = date_squared.last
+
+    return @offset_hash
   end
 
 
