@@ -1,4 +1,5 @@
 require 'date'
+require 'pry'
 
 class Encrypt
   attr_reader :message, :key, :date, :key_hash
@@ -10,6 +11,7 @@ class Encrypt
     @date = date
     @key_hash = Hash.new (0)
     @offset_hash = Hash.new (0)
+    @shift_amount = Hash.new (0)
   end
 
   def key_shift
@@ -35,6 +37,28 @@ class Encrypt
     @offset_hash[:a] = date_squared.last
 
     return @offset_hash
+  end
+
+  def shift_amount
+    @shift_amount[:a] = (@key_hash[:a].to_i + @offset_hash[:a].to_i)
+    @shift_amount[:b] = (@key_hash[:b].to_i + @offset_hash[:b].to_i)
+    @shift_amount[:c] = (@key_hash[:c].to_i + @offset_hash[:c].to_i)
+    @shift_amount[:d] = (@key_hash[:d].to_i + @offset_hash[:d].to_i)
+
+
+    @shift_amount.each do |key, value|
+      until value <= 27 do
+        value -= 27
+      end
+      @shift_amount[key] = value
+    end
+
+    return @shift_amount
+
+  end
+
+  def encrypt
+    
   end
 
 

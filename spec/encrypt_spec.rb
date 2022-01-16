@@ -31,4 +31,10 @@ RSpec.describe Encrypt do
     expect(@encrypt.offset_shift).to eq({a: "4", b: "8", c: "8", d: "4"})
   end
 
+  it 'can assign a number to a - d to know how many numbers to shift' do
+    @encrypt.key_shift
+    @encrypt.offset_shift
+    expect(@encrypt.shift_amount).to eq({a: 21, b: 27, c: 19, d: 3})
+  end
+
 end
