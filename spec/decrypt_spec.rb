@@ -11,4 +11,8 @@ RSpec.describe Decrypt do
     expect(@decrypt).to be_instance_of(Decrypt)
   end
 
+  it 'has a ciphertext' do
+    expect(@decrypt.ciphertext).to eq('Test')
+  end
+
 end
