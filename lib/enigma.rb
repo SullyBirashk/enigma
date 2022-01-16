@@ -1,4 +1,5 @@
 require 'date'
+require './lib/encrypt'
 
 class Enigma
   attr_reader
@@ -6,10 +7,8 @@ class Enigma
 
 
   def encrypt(message, key, date)
-
+    # Encrypt.new(message, key, date)
   end
-
-
 
 
 
