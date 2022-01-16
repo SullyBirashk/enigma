@@ -23,4 +23,8 @@ RSpec.describe Encrypt do
     expect(@encrypt.date).to eq("150122")
   end
 
+  it 'can show me shift key' do
+    expect(@encrypt.key_shift).to eq({a: "17", b: "73", c: "38", d: "80"})
+  end
+
 end
