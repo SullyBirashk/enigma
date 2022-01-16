@@ -15,4 +15,8 @@ RSpec.describe Encrypt do
     expect(@encrypt.message).to eq("Test")
   end
 
+  it 'has a key' do
+    expect(@encrypt.key).to eq(17380)
+  end
+
 end
