@@ -11,4 +11,8 @@ RSpec.describe Encrypt do
     expect(@encrypt).to be_instance_of(Encrypt)
   end
 
+  it 'has a message' do
+    expect(@encrypt.message).to eq("Test")
+  end
+
 end
