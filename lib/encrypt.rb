@@ -1,14 +1,16 @@
 require 'date'
 
 class Encrypt
-attr_reader :message, :key, :date
-attr_accessor
+  attr_reader :message, :key, :date
+  attr_accessor
 
-def initialize(message, key, date)
-  @message = message
-  @key = key
-  @date = date
-end
+  def initialize(message, key, date)
+    @message = message
+    @key = key
+    @date = date
+  end
+
+  
 
 
 end
