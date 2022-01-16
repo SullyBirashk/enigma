@@ -15,4 +15,8 @@ RSpec.describe Decrypt do
     expect(@decrypt.ciphertext).to eq('Test')
   end
 
+  it 'has a key' do
+    expect(@decrypt.key).to eq(17380)
+  end
+
 end
