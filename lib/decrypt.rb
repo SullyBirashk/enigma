@@ -36,8 +36,26 @@ class Decrypt
     date_squared.pop
     @offset_hash[:a] = date_squared.last
 
-    #shift_amount
+    shift_amount
     return @offset_hash
+  end
+
+  def shift_amount
+    @shift_amount[:first] = (@key_hash[:a].to_i + @offset_hash[:a].to_i)
+    @shift_amount[:second] = (@key_hash[:b].to_i + @offset_hash[:b].to_i)
+    @shift_amount[:third] = (@key_hash[:c].to_i + @offset_hash[:c].to_i)
+    @shift_amount[:fourth] = (@key_hash[:d].to_i + @offset_hash[:d].to_i)
+
+
+    @shift_amount.each do |key, value|
+      until value <= 27 do
+        value -= 27
+      end
+      @shift_amount[key] = value
+    end
+
+    return @shift_amount
+
   end
 
 

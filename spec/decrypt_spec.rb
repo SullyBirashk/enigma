@@ -5,6 +5,8 @@ require 'pry'
 RSpec.describe Decrypt do
   before :each do
     @decrypt = Decrypt.new("nekw", "17380", "150122")
+    @decrypt.key_shift
+    @decrypt.offset_shift
   end
 
   it 'exists' do
@@ -31,7 +33,7 @@ RSpec.describe Decrypt do
     expect(@decrypt.offset_shift).to eq({a: "4", b: "8", c: "8", d: "4"})
   end
 
-  xit 'can assign a number to a - d to know how many numbers to shift' do
+  it 'can assign a number to a - d to know how many numbers to shift' do
     expect(@decrypt.shift_amount).to eq({first: 21, second: 27, third: 19, fourth: 3})
   end
 
