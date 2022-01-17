@@ -4,7 +4,7 @@ require 'pry'
 
 RSpec.describe Encrypt do
   before :each do
-    @encrypt = Encrypt.new("hello world", "17380", "150122")
+    @encrypt = Encrypt.new("Test", "17380", "150122")
   end
 
   it 'exists' do
@@ -12,7 +12,7 @@ RSpec.describe Encrypt do
   end
 
   it 'has a message' do
-    expect(@encrypt.message).to eq("hello world")
+    expect(@encrypt.message).to eq("Test")
   end
 
   it 'has a key' do

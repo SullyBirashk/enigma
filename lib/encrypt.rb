@@ -141,7 +141,7 @@ class Encrypt
 
     reverse_map = letters.invert
 
-    encrypted_message_array = rotate_amount.zip message_split # [[21, "t"], [27, "e"], [19, "s"], [3, "t"]]
+    encrypted_message_array = sully_zip(rotate_amount, message_split) # [[21, "t"], [27, "e"], [19, "s"], [3, "t"]]
 
     encrypted_message_array.each do |shift, let|
       current_position = reverse_map[let]
@@ -164,15 +164,12 @@ class Encrypt
 
   end
 
-  # message_split = @message.downcase.split("") # Returns ["t", "e", "s", "t"]
-  # rotate_amount = @shift_amount.values # Returns [21, 27, 19, 3]
-
   def sully_zip(test_shift, test_message)
     collector = []
     counter = 0
     original_test_shift = test_shift
-    test_message.each_with_index do |letter, position|
-      if position > 3
+    test_message.each_with_index do |letter, index|
+      if index%4 == 0
         counter = 0
       end
       collector << [test_shift[counter], letter]

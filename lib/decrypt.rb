@@ -60,5 +60,82 @@ class Decrypt
 
   end
 
+  def decrypt
+    letters = {
+      1 => "a",
+      2 => "b",
+      3 => "c",
+      4 => "d",
+      5 => "e",
+      6 => "f",
+      7 => "g",
+      8 => "h",
+      9 => "i",
+      10 => "j",
+      11 => "k",
+      12 => "l",
+      13 => "m",
+      14 => "n",
+      15 => "o",
+      16 => "p",
+      17 => "q",
+      18 => "r",
+      19 => "s",
+      20 => "t",
+      21 => "u",
+      22 => "v",
+      23 => "w",
+      24 => "x",
+      25 => "y",
+      26 => "z",
+      27 => " "
+    }
+
+    seperated_decrypted_message = []
+
+    message_split = @ciphertext.downcase.split("") # Returns ["n", "e", "k", "w"]
+    rotate_amount = @shift_amount.values
+
+    reverse_map = letters.invert
+
+    decrypted_message_array = sully_zip(rotate_amount, message_split) # [[21, "n"], [27, "e"], [19, "k"], [3, "w"]]
+
+    decrypted_message_array.each do |shift, let| # [[21, "n"], [27, "e"], [19, "k"], [3, "w"]]
+      current_position = reverse_map[let]
+      new_position = current_position - shift
+        if new_position > 27
+          until new_position <= 27 do
+            new_position -= 27
+          end
+        elsif new_position < 0
+          new_position = 27 - new_position.abs
+        end
+      seperated_decrypted_message << new_letter = letters[new_position]
+    end
+
+    decrypted_message = seperated_decrypted_message.join
+
+    @decrypted_hash[:decryption] = decrypted_message
+    @decrypted_hash[:key] = @key
+    @decrypted_hash[:date] = @date
+
+    return @decrypted_hash
+
+  end
+
+  def sully_zip(test_shift, test_message)
+    collector = []
+    counter = 0
+    original_test_shift = test_shift
+    test_message.each_with_index do |letter, index|
+      if index%4 == 0
+        counter = 0
+      end
+      collector << [test_shift[counter], letter]
+      counter += 1
+    end
+    return collector
+  end
+
 
 end
