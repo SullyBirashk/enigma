@@ -25,5 +25,20 @@ class Decrypt
     return @key_hash
   end
 
+  def offset_shift
+    date_squared = (@date.to_i * @date.to_i).to_s.split('') # Returns ["2", "2", "5", "3", "6", "6", "1", "4", "8", "8", "4"]
+
+    @offset_hash[:d] = date_squared.last
+    date_squared.pop
+    @offset_hash[:c] = date_squared.last
+    date_squared.pop
+    @offset_hash[:b] = date_squared.last
+    date_squared.pop
+    @offset_hash[:a] = date_squared.last
+
+    #shift_amount
+    return @offset_hash
+  end
+
 
 end

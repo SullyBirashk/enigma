@@ -27,7 +27,7 @@ RSpec.describe Decrypt do
     expect(@decrypt.key_shift).to eq({a: "17", b: "73", c: "38", d: "80"})
   end
 
-  xit 'can assign a - d a number called offset' do
+  it 'can assign a - d a number called offset' do
     expect(@decrypt.offset_shift).to eq({a: "4", b: "8", c: "8", d: "4"})
   end
 
