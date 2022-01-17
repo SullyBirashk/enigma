@@ -4,7 +4,7 @@ require 'pry'
 
 RSpec.describe Decrypt do
   before :each do
-    @decrypt = Decrypt.new("Test", 17380, 150122)
+    @decrypt = Decrypt.new("Test", "17380", "150122")
   end
 
   it 'exists' do
@@ -16,11 +16,11 @@ RSpec.describe Decrypt do
   end
 
   it 'has a key' do
-    expect(@decrypt.key).to eq(17380)
+    expect(@decrypt.key).to eq("17380")
   end
 
   it 'has a date' do
-    expect(@decrypt.date).to eq(150122)
+    expect(@decrypt.date).to eq("150122")
   end
 
 end

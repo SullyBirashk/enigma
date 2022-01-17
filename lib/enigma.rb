@@ -7,7 +7,7 @@ class Enigma
 
 
   def encrypt(message, key, date)
-    # Encrypt.new(message, key, date)
+    # Encrypt.new(message, key, date).encrypt
   end
 
 
