@@ -5,8 +5,6 @@ require 'pry'
 RSpec.describe Encrypt do
   before :each do
     @encrypt = Encrypt.new("Test", "17380", "150122")
-    @encrypt.key_shift
-    @encrypt.offset_shift
   end
 
   it 'exists' do

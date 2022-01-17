@@ -6,8 +6,8 @@ class Enigma
   attr_accessor
 
 
-  def encrypt(message, key, date)
-    # Encrypt.new(message, key, date).encrypt
+  def encrypt(message, key, date = Time.now.strftime("%d%m%y"))
+     Encrypt.new(message, key, date).encrypt
   end
 
 
