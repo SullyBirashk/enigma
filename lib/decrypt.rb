@@ -12,6 +12,8 @@ class Decrypt
     @offset_hash = Hash.new (0)
     @shift_amount = Hash.new (0)
     @decrypted_hash = Hash.new(0)
+    key_shift
+    offset_shift
   end
 
   def key_shift

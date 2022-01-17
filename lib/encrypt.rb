@@ -2,7 +2,7 @@ require 'date'
 require 'pry'
 
 class Encrypt
-  attr_reader :message, :key, :date, :key_hash
+  attr_reader :message, :key, :date
   attr_accessor
 
   def initialize(message, key, date)
@@ -13,6 +13,8 @@ class Encrypt
     @offset_hash = Hash.new (0)
     @shift_amount = Hash.new (0)
     @encrypted_hash = Hash.new(0)
+    key_shift
+    offset_shift
   end
 
   def key_shift
@@ -169,8 +171,7 @@ class Encrypt
     collector = []
     counter = 0
     original_test_shift = test_shift
-    test_message.each do |letter|
-      position = test_message.find_index(letter)
+    test_message.each_with_index do |letter, position|
       if position > 3
         counter = 0
       end
