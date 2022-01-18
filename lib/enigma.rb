@@ -25,3 +25,5 @@ class Enigma
 
 
 end
+binding.pry
+puts 
