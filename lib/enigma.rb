@@ -15,5 +15,13 @@ class Enigma
     Decrypt.new(ciphertext, key, date).decrypt
   end
 
+  def random_key_generator
+    @collector = []
+    until @collector.length == 5 do
+      @collector << rand(10)
+    end
+    return @collector
+  end
+
 
 end
