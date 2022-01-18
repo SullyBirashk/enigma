@@ -5,8 +5,6 @@ require 'pry'
 RSpec.describe Encrypt do
   before :each do
     @encrypt = Encrypt.new("Test", "17380", "150122")
-    @encrypt.key_shift
-    @encrypt.offset_shift
   end
 
   it 'exists' do
@@ -40,6 +38,3 @@ RSpec.describe Encrypt do
   it 'encryt a message' do
     expect(@encrypt.encrypt).to eq({encryption: "nekw", key: "17380", date: "150122"})
   end
-
-
-end
