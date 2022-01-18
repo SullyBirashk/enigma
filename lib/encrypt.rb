@@ -17,49 +17,49 @@ class Encrypt
     offset_shift
   end
 
-def key_shift
-  seperated_key = @key.split('') # Returns ["1", "7", "3", "8", "0"]
+  def key_shift
+    seperated_key = @key.split('') # Returns ["1", "7", "3", "8", "0"]
 
-  @key_hash[:a] = seperated_key[0] + seperated_key[1]
-  @key_hash[:b] = seperated_key[1] + seperated_key[2]
-  @key_hash[:c] = seperated_key[2] + seperated_key[3]
-  @key_hash[:d] = seperated_key[3] + seperated_key[4]
+    @key_hash[:a] = seperated_key[0] + seperated_key[1]
+    @key_hash[:b] = seperated_key[1] + seperated_key[2]
+    @key_hash[:c] = seperated_key[2] + seperated_key[3]
+    @key_hash[:d] = seperated_key[3] + seperated_key[4]
 
-  return @key_hash
-end
-
-def offset_shift
-  date_squared = (@date.to_i * @date.to_i).to_s.split('') # Returns ["2", "2", "5", "3", "6", "6", "1", "4", "8", "8", "4"]
-
-  @offset_hash[:d] = date_squared.last
-  date_squared.pop
-  @offset_hash[:c] = date_squared.last
-  date_squared.pop
-  @offset_hash[:b] = date_squared.last
-  date_squared.pop
-  @offset_hash[:a] = date_squared.last
-
-  shift_amount
-  return @offset_hash
-end
-
-def shift_amount
-  @shift_amount[:first] = (@key_hash[:a].to_i + @offset_hash[:a].to_i)
-  @shift_amount[:second] = (@key_hash[:b].to_i + @offset_hash[:b].to_i)
-  @shift_amount[:third] = (@key_hash[:c].to_i + @offset_hash[:c].to_i)
-  @shift_amount[:fourth] = (@key_hash[:d].to_i + @offset_hash[:d].to_i)
-
-
-  @shift_amount.each do |key, value|
-    until value <= 27 do
-      value -= 27
-    end
-    @shift_amount[key] = value
+    return @key_hash
   end
 
-  return @shift_amount
+  def offset_shift
+    date_squared = (@date.to_i * @date.to_i).to_s.split('') # Returns ["2", "2", "5", "3", "6", "6", "1", "4", "8", "8", "4"]
 
-end
+    @offset_hash[:d] = date_squared.last
+    date_squared.pop
+    @offset_hash[:c] = date_squared.last
+    date_squared.pop
+    @offset_hash[:b] = date_squared.last
+    date_squared.pop
+    @offset_hash[:a] = date_squared.last
+
+    shift_amount
+    return @offset_hash
+  end
+
+  def shift_amount
+    @shift_amount[:first] = (@key_hash[:a].to_i + @offset_hash[:a].to_i)
+    @shift_amount[:second] = (@key_hash[:b].to_i + @offset_hash[:b].to_i)
+    @shift_amount[:third] = (@key_hash[:c].to_i + @offset_hash[:c].to_i)
+    @shift_amount[:fourth] = (@key_hash[:d].to_i + @offset_hash[:d].to_i)
+
+
+    @shift_amount.each do |key, value|
+      until value <= 27 do
+        value -= 27
+      end
+      @shift_amount[key] = value
+    end
+
+    return @shift_amount
+
+  end
 
   def encrypt
     letters = {
@@ -151,17 +151,18 @@ end
             new_position -= 27
           end
         end
-      end
-    seperated_encrypted_message << new_letter = letters[new_position]
+      seperated_encrypted_message << new_letter = letters[new_position]
+    end
+
+    encrypted_message = seperated_encrypted_message.join
+
+    @encrypted_hash[:encryption] = encrypted_message
+    @encrypted_hash[:key] = @key
+    @encrypted_hash[:date] = @date
+
+    return @encrypted_hash
+
   end
-
-  encrypted_message = seperated_encrypted_message.join
-
-  @encrypted_hash[:encryption] = encrypted_message
-  @encrypted_hash[:key] = @key
-  @encrypted_hash[:date] = @date
-
-  return @encrypted_hash
 
   def sully_zip(test_shift, test_message)
     collector = []
@@ -174,11 +175,8 @@ end
       collector << [test_shift[counter], letter]
       counter += 1
     end
-    collector << [test_shift[counter], letter]
-    counter += 1
+    return collector
   end
-  return collector
-end
 
 
 end

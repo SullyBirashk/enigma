@@ -1,5 +1,6 @@
 require 'date'
 require './lib/encrypt'
+require './lib/decrypt'
 
 class Enigma
   attr_reader

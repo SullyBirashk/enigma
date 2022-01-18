@@ -38,3 +38,4 @@ RSpec.describe Encrypt do
   it 'encryt a message' do
     expect(@encrypt.encrypt).to eq({encryption: "nekw", key: "17380", date: "150122"})
   end
+end
