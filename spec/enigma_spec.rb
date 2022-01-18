@@ -33,7 +33,11 @@ RSpec.describe Enigma do
   end
 
   it 'can generate a random key' do
-    expect(@enigma.random_key_generator.count).to eq(5)
+    expect(@enigma.random_key_generator).to be_instance_of String
+  end
+
+  it 'can encrypt a message without key or date' do
+    expect(@enigma.encrypt("hello world")).to be_instance_of Hash
   end
 
 end

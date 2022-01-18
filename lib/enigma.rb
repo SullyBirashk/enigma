@@ -7,11 +7,11 @@ class Enigma
   attr_accessor
 
 
-  def encrypt(message, key, date = Time.now.strftime("%d%m%y"))
+  def encrypt(message, key = random_key_generator, date = Time.now.strftime("%d%m%y"))
     Encrypt.new(message, key, date).encrypt
   end
 
-  def decrypt(ciphertext, key, date = Time.now.strftime("%d%m%y"))
+  def decrypt(ciphertext, key = random_key_generator, date = Time.now.strftime("%d%m%y"))
     Decrypt.new(ciphertext, key, date).decrypt
   end
 
@@ -20,7 +20,7 @@ class Enigma
     until @collector.length == 5 do
       @collector << rand(10)
     end
-    return @collector
+    return @collector.join
   end
 
 
