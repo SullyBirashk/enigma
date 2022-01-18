@@ -91,48 +91,6 @@ class Encrypt
       26 => "z",
       27 => " "
     }
-    # reverse_map = letters.invert
-    #
-    # message_split = @message.downcase.split("") # Returns ["t", "e", "s", "t"]
-    # rotate_amount = @shift_amount.values # Returns [21, 27, 19, 3]
-    # # rotate_amount is always 4 numbers
-    #
-    #
-    # letter_and_shift_amount = sully_zip(@shift_amount.values, message_split) # Returns [[21, "t"], [27, "e"], [19, "s"], [3, "t"]]
-    #
-    # @letter_position = [] # Returns [20, 5, 19, 20]
-    # message_split.each do |letter|
-    #   let_pos = reverse_map[letter]
-    #   @letter_position << let_pos
-    # end
-    #
-    # shifted_letter_position = [] # Returns [41, 32, 38, 23]
-    # rotate_amount.each do |shift|
-    #   shifted_letter_position << (shift + @letter_position[0])
-    #   @letter_position.shift
-    # end
-    #
-    # simple_shift_position = [] # Returns [14, 5, 11, 23]
-    # shifted_letter_position.each do |shift_pos|
-    #   until shift_pos <= 27 do
-    #      shift_pos -= 27
-    #   end
-    #   simple_shift_position << shift_pos
-    # end
-    #
-    # seperated_encrypted_message = [] # Returns ["n", "e", "k", "w"]
-    # simple_shift_position.each do |let_pos|
-    #   seperated_encrypted_message << letters[let_pos]
-    # end
-    #
-    # encrypted_message = seperated_encrypted_message.join # Returns "nekw"
-    #
-    # @encrypted_hash[:encryption] = encrypted_message
-    # @encrypted_hash[:key] = @key
-    # @encrypted_hash[:date] = @date
-    #
-    # return @encrypted_hash
-
 
     seperated_encrypted_message = []
 
@@ -141,7 +99,7 @@ class Encrypt
 
     reverse_map = letters.invert
 
-    encrypted_message_array = sully_zip(rotate_amount, message_split) # [[21, "t"], [27, "e"], [19, "s"], [3, "t"]]
+    encrypted_message_array = custom_zip(rotate_amount, message_split) # [[21, "t"], [27, "e"], [19, "s"], [3, "t"]]
 
     encrypted_message_array.each do |shift, let|
       current_position = reverse_map[let]
@@ -164,15 +122,14 @@ class Encrypt
 
   end
 
-  def sully_zip(test_shift, test_message)
+  def custom_zip(shift_amount, message)
     collector = []
     counter = 0
-    original_test_shift = test_shift
-    test_message.each_with_index do |letter, index|
+    message.each_with_index do |letter, index|
       if index%4 == 0
         counter = 0
       end
-      collector << [test_shift[counter], letter]
+      collector << [shift_amount[counter], letter]
       counter += 1
     end
     return collector

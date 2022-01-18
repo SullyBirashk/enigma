@@ -98,7 +98,7 @@ class Decrypt
 
     reverse_map = letters.invert
 
-    decrypted_message_array = sully_zip(rotate_amount, message_split) # [[21, "n"], [27, "e"], [19, "k"], [3, "w"]]
+    decrypted_message_array = custom_zip(rotate_amount, message_split) # [[21, "n"], [27, "e"], [19, "k"], [3, "w"]]
 
     decrypted_message_array.each do |shift, let| # [[21, "n"], [27, "e"], [19, "k"], [3, "w"]]
       current_position = reverse_map[let]
@@ -123,15 +123,14 @@ class Decrypt
 
   end
 
-  def sully_zip(test_shift, test_message)
+  def custom_zip(shift_amount, message)
     collector = []
     counter = 0
-    original_test_shift = test_shift
-    test_message.each_with_index do |letter, index|
+    message.each_with_index do |letter, index|
       if index%4 == 0
         counter = 0
       end
-      collector << [test_shift[counter], letter]
+      collector << [shift_amount[counter], letter]
       counter += 1
     end
     return collector
